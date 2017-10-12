@@ -1,0 +1,24 @@
+#include<CayenneMQTTESP8266.h>
+#define CAYENNE_DEBUG
+#define CAYENNE_PRINT Serial
+char* ssid="username";   // wifi ssid
+char* password="password";   //wifi password
+char* username="46d170e0-ad41-11e7-98fe-97ee227ec16c";
+char* mqttpass="8f6d0f4d8b7398c7106ba26ba6aaa761533cb58e";
+char* client_id="8ae82a80-ad41-11e7-bd7e-3193fab997a8";
+void setup() 
+{
+  Cayenne.begin(username,mqttpass,client_id,ssid,password);
+  pinMode(2,OUTPUT); // Builtin LED is Used for Output
+  digitalWrite(2,HIGH); 
+
+}
+
+void loop() 
+{
+Cayenne.loop();  
+}
+CAYENNE_IN(0) // Channel 0 is used 
+{
+  digitalWrite(2,!getValue.asInt());
+}
